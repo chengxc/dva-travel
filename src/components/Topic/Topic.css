@@ -1,0 +1,29 @@
+/* 标题区域 */
+.topic-header{
+    width:90%;
+    margin:0 auto;
+}
+.topic-title{
+    margin:5px auto;
+}
+.topic-desc{
+    color:#838383;
+    margin:5px auto;
+}
+/* 内容区域 */
+.topic-content{
+    border-top:1px solid #e5e5e5;
+    padding:18px;
+    font-size: 15px;
+    line-height: 1.7em;
+}
+
+/* 回复区域 */
+.topic-reply{
+    word-wrap:break-word;
+}
+
+.topic-reply-title{
+    background-color: #f6f6f6;
+    padding:10px;
+}

@@ -1,9 +1,11 @@
 
 export default {
 
-  namespace: 'example',
+  namespace: 'common',
 
-  state: {},
+  state: {
+    loading: false,
+  },
 
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
@@ -19,6 +21,14 @@ export default {
   reducers: {
     save(state, action) {
       return { ...state, ...action.payload };
+    },
+    // 加载中
+    loading(state) {
+      return { ...state, loading: true };
+    },
+    // 加载结束
+    loaded(state) {
+      return { ...state, loading: false };
     },
   },
 

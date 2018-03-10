@@ -1,0 +1,24 @@
+.reply-container{
+    border-bottom:1px solid #e5e5e5;
+    padding:10px;
+}
+
+.reply-header{
+    display: flex;
+    line-height: 30px;
+    font-size: 11px;
+}
+.avatar img{
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+}
+.create-time{
+    color:#08c;
+}
+.reply-content{
+
+}
+.star-count{
+    margin-left:auto;
+}
