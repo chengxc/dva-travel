@@ -20,5 +20,10 @@
 
 }
 .star-count{
+    color:gray;
     margin-left:auto;
+}
+.star-count span{
+    display: inline-block;
+    margin-left: 0.3rem;
 }

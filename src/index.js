@@ -2,13 +2,13 @@
 import 'antd-mobile/dist/antd-mobile.css';
 
 import dva from 'dva';
-import ExampleModel from './models/example';
 import DataListModel from './components/DataList/DataListModel';
 import CommonModel from './models/common';
 import TopicModel from './components/Topic/TopicModel';
 import router from './router';
 
 import './assets/common.css';
+// import './assets/fontawesome/css/fontawesome-all.css';
 
 // 1. 初始化
 const app = dva();
@@ -17,7 +17,6 @@ const app = dva();
 // app.use({});
 
 // 3. Model
-app.model(ExampleModel);
 app.model(DataListModel);
 app.model(CommonModel);
 app.model(TopicModel);

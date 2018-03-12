@@ -5,30 +5,46 @@ import styles from './ToTop.css';
 
 /* eslint-disable */
 const toTop = () => {
-  window.scrollTo(0, 0);
+  let y = window.scrollY;
+  var timer = setInterval(() => {
+    if (y >= 0) {
+      y -= 100;
+      window.scrollTo(0, y);
+    } else {
+      clearInterval(timer);
+    }
+  }, 10);
 };
 /* eslint-disable */
 
-class Topic extends React.Component {
+class ToTop extends React.Component {
   constructor(props) {
-    console.log("执行了");
+    console.log('执行了ToTop');
     super(props);
     this.scroll = this.scroll.bind(this);
-    window.addEventListener("scroll",()=>{
-      alert("滚动了");
-      this.scroll();
-    })
+    this.state = {
+      isShow: this.props.isShow,
+    };
   }
   /* eslint-disable */
   scroll() {
-    console.log(this.props.isShow);
-    this.props.isShow = window.pageYOffset >= 50;
+    // console.log(this.state.isShow);
+    this.setState({
+      isShow:window.pageYOffset >= 50
+    })
   }
   /* eslint-disable */
+  componentDidMount(){
+    window.addEventListener("scroll",()=>{
+      // alert("滚动了");
+      this.scroll();
+    })
+    
+  }
   render() {
     return (
       <div>
-        {this.props.isShow && (
+        {this.state.isShow && (
           <div onClick={toTop} className={styles['scroll-container']}>回到顶部</div>
         )}
       </div>
@@ -40,4 +56,4 @@ function mapStateToProps() {
     isShow: false,
   };
 }
-export default connect(mapStateToProps)(Topic);
+export default connect(mapStateToProps)(ToTop);

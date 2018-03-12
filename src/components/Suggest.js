@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
 import DataList from '../components/DataList/DataList';
-import ToTop from './ToTop/ToTop';
 import Header from './Header/Header';
 
 const items = [
@@ -268,7 +267,6 @@ const Suggest = () => {
     <div>
       <Header />
       <DataList items={items} />
-      <ToTop />
     </div>
   );
 };

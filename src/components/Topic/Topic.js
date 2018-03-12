@@ -3,8 +3,9 @@ import { connect } from 'dva';
 import { ActivityIndicator } from 'antd-mobile';
 import styles from './Topic.css';
 import Header from '../Header/Header';
+import ToTop from '../ToTop/ToTop';
 import dateConvert from '../../utils/dateConvert';
-import Reply from './Reply';
+import Reply from '../Reply/Reply';
 
 class Topic extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class Topic extends React.Component {
               <span>条回复</span>
             </div>
             {this.props.replies.map(item => (
-              <Reply item={item} />
+              <Reply item={item} key={item.id} />
             ))}
           </div>
         </div>
@@ -54,6 +55,8 @@ class Topic extends React.Component {
           text="Loading..."
           animating={this.props.loading}
         />
+
+        <ToTop />
       </div>
     );
   }

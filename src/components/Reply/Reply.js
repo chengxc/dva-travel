@@ -19,8 +19,8 @@ const Reply = ({ item }) => {
           {dateConvert.getDateTimeStr(item.create_at)}
         </div>
         <div className={styles['star-count']}>
-          <i className="fa fa-thumbs-o-up" />
-        点赞数：{item.ups.length}
+          <i className={item.is_uped ? 'fas fa-thumbs-up' : 'far fa-thumbs-up'} />
+          <span>{item.ups.length}</span>
         </div>
       </div>
       <div className={styles['reply-content']}>{item.content}</div>

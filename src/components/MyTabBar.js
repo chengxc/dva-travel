@@ -81,6 +81,7 @@ class MyTarbar extends React.Component {
         >
           {this.state.items.map(v => this.renderItem(v.title, v.key))}
         </TabBar>
+
       </div>
     );
   }
