@@ -1,0 +1,44 @@
+.menu-container{
+    background: #f2f2f2;
+}
+.menu-row{
+    height:5rem;
+    border-radius: 5px;
+    width:98%;
+    margin:0 auto;
+}
+.menu-row>.menu-cell{
+    height:100%;
+    position: relative;
+    margin-left: 1px;
+}
+.menu-row>.menu-cell a{
+    height:50%;
+    line-height: 2.5rem;
+    margin-bottom: 1px;
+}
+.menu-row>.menu-cell a:only-child{
+    height:100% !important;
+    line-height: 5rem;
+}
+.menu-row a{
+    display: inline-block;
+    color: #fff;
+    width:100%;
+    text-align: center;
+}
+.hotel.menu-row a{
+    background-color: #ff697a;
+}
+.ticket.menu-row a{
+    background-color: #3d98ff;
+}
+.travel.menu-row a{
+    background-color: #44c522;
+}
+.other.menu-row a{
+    background-color: #fc9720;
+}
+.menu-cell{
+
+}

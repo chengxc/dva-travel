@@ -4,7 +4,6 @@ import styles from './IndexPage.css';
 import MyTarBar from '../components/MyTabBar';
 
 function IndexPage() {
-  // console.log(dispatch);
   return (
     <div className={styles.normal}>
       <MyTarBar />

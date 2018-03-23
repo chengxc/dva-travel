@@ -2,9 +2,8 @@
 import 'antd-mobile/dist/antd-mobile.css';
 
 import dva from 'dva';
-import DataListModel from './components/DataList/DataListModel';
+import BannerModel from './components/BannerModel';
 import CommonModel from './models/common';
-import TopicModel from './components/Topic/TopicModel';
 import router from './router';
 
 import './assets/common.css';
@@ -16,10 +15,9 @@ const app = dva();
 // 2. 注入插件
 // app.use({});
 
-// 3. Model
-app.model(DataListModel);
+// 3. 注入Model
 app.model(CommonModel);
-app.model(TopicModel);
+app.model(BannerModel);
 
 // 4. Router
 app.router(router);

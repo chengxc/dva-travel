@@ -4,7 +4,6 @@ const Customer = () => {
   return (
     <div>
       <div>客服</div>
-      <div>{}</div>
     </div>
   );
 };

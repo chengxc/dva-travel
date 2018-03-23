@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Example = (props) => {
+const My = (props) => {
   return (
     <div>
       <div>我的</div>
@@ -9,7 +9,7 @@ const Example = (props) => {
   );
 };
 
-Example.propTypes = {
+My.propTypes = {
 };
 
-export default Example;
+export default My;

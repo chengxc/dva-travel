@@ -4,7 +4,6 @@ const Travel = () => {
   return (
     <div>
       <div>旅游</div>
-      <div>{}</div>
     </div>
   );
 };

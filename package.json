@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "roadhog server HOST=192.168.69.17",
+    "start": "roadhog server HOST=192.168.68.228",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
@@ -9,6 +9,8 @@
   "dependencies": {
     "antd": "^3.2.3",
     "antd-mobile": "^2.1.6",
+    "axios": "^0.18.0",
+    "classnames": "^2.2.5",
     "dva": "^2.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"

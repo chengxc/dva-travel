@@ -6,7 +6,7 @@ import IndexPage from './routes/IndexPage';
 import My from './components/My';
 import Suggest from './components/Suggest';
 import Customer from './components/Customer';
-import Topic from './components/Topic/Topic';
+import Train from './components/Train';
 
 function RouterConfig({ history }) {
   return (
@@ -16,7 +16,7 @@ function RouterConfig({ history }) {
         <Route path="/customer" exact component={Customer} />
         <Route path="/my" exact component={My} />
         <Route path="/suggest" exact component={Suggest} />
-        <Route path="/topic/:id" exact component={Topic} />
+        <Route path="/train" exact component={Train} />
       </Switch>
     </Router>
   );
