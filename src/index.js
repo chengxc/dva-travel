@@ -3,6 +3,7 @@ import 'antd-mobile/dist/antd-mobile.css';
 
 import dva from 'dva';
 import BannerModel from './components/BannerModel';
+import TrainListModel from './components/TrainListModel';
 import CommonModel from './models/common';
 import router from './router';
 
@@ -18,6 +19,7 @@ const app = dva();
 // 3. 注入Model
 app.model(CommonModel);
 app.model(BannerModel);
+app.model(TrainListModel);
 
 // 4. Router
 app.router(router);

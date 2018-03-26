@@ -16,11 +16,14 @@ class Train extends React.Component {
       config: {
         type: 'one',
       },
+      origin: '',
+      dest: '',
     };
     this.showCalender = this.showCalender.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.onConfirm = this.onConfirm.bind(this);
     this.onClickBack = this.onClickBack.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.history = history;
   }
   onCancel() {
@@ -36,6 +39,21 @@ class Train extends React.Component {
   }
   onClickBack() {
     this.history.goBack();
+  }
+  onSubmit() {
+    this.history.push({
+      pathname: `/trainlist/${this.state.origin}/${this.state.dest}/${date.getYearMonthDay2(this.state.date)}/${this.state.isHighway}`,
+      search: `isHighway=${this.state.isHighway}`,
+    });
+  }
+  // 处理表单输入
+  onInputChnage(name) {
+    return (e) => {
+      // console.log(e.target.value);
+      this.setState({
+        [name]: e.target.value,
+      });
+    };
   }
   showCalender() {
     this.setState({
@@ -57,9 +75,9 @@ class Train extends React.Component {
         <img className={styles['img-header']} src="https://images3.c-ctrip.com/train/h5/train-index-adv-default.png" alt="" />
         <List>
           <Item>
-            <input type="text" />
+            <input type="text" value={this.state.origin} onChange={this.onInputChnage('origin')} />
             到
-            <input type="text" />
+            <input type="text" value={this.state.dest} onChange={this.onInputChnage('dest')} />
           </Item>
           <Item>
             <Button onClick={this.showCalender} >{date.getYearMonthDay(this.state.date)}</Button>
@@ -73,7 +91,7 @@ class Train extends React.Component {
             </CheckboxItem>
           </Item>
           <Item>
-            <Button className={styles['btn-submit']} >查询</Button>
+            <Button className={styles['btn-submit']} onClick={this.onSubmit}>查询</Button>
           </Item>
         </List>
         {/* 日期选择器 */}
