@@ -26,7 +26,10 @@ export default {
         type: 'save',
       });
     },
-    * getTrains({origin,dest,isHighway,date}, {put,}) { // eslint-disable-line
+    * getTrains({origin,dest,isHighway,date}, {put}) { // eslint-disable-line
+      yield put({
+        type: 'common/loading',
+      });
       const response = yield TrainListService.getTrains({
         dest,
         origin,
@@ -40,6 +43,9 @@ export default {
         arrive: response.ChineseArriveStation,
         depart: response.ChineseDepartStation,
         date,
+      });
+      yield put({
+        type: 'common/loaded',
       });
     },
   },

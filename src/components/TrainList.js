@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { NavBar, Icon, List, Flex } from 'antd-mobile';
+import { NavBar, Icon, List, Flex, Calendar, ActivityIndicator } from 'antd-mobile';
 import { Link } from 'dva/router';
 import styles from './TrainList.less';
 import date from '../utils/date';
@@ -19,6 +19,7 @@ class TrainList extends React.Component {
     this.history = history;
     this.state = {
       showSeat: true, // 显示座位数，不显示价格
+      showCalender: false, // 是否显示日期选择控件
     };
 
     dispatch({
@@ -30,9 +31,31 @@ class TrainList extends React.Component {
     });
     this.dispatch = dispatch;
     this.search = this.search.bind(this);
+    this.searchDate = this.searchDate.bind(this);
+    this.selectDate = this.selectDate.bind(this);
+    this.onConfirm = this.onConfirm.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+  }
+  onSelect(d) {
+    const dateStr = date.getYearMonthDay2(d);
+    this.setState({
+      showCalender: false,
+    });
+    this.dispatch({
+      type: 'trainList/getTrains',
+      origin: this.props.depart,
+      dest: this.props.arrive,
+      date: dateStr,
+      isHighway: this.props.isHighway,
+    });
   }
   onClickBack() {
     this.history.goBack();
+  }
+  onConfirm() {
+    this.setState({
+      showCalender: false,
+    });
   }
   search(e) {
     this.a = 5;
@@ -43,6 +66,28 @@ class TrainList extends React.Component {
     this.dispatch({
       type: 'trainList/sort',
       key,
+    });
+  }
+  searchDate($date) {
+    return () => {
+      if (typeof $date === 'number') {
+        if ($date < 0 && date.isToday(this.props.date)) { return console.log('已经是最早的一天了'); }
+
+        const prev = new Date(new Date(this.props.date) - (-$date * 24 * 3600 * 1000));
+        const prevDateStr = date.getYearMonthDay2(prev);
+        this.dispatch({
+          type: 'trainList/getTrains',
+          origin: this.props.depart,
+          dest: this.props.arrive,
+          date: prevDateStr,
+          isHighway: this.props.isHighway,
+        });
+      }
+    };
+  }
+  selectDate() {
+    this.setState({
+      showCalender: true,
     });
   }
   render() {
@@ -62,9 +107,9 @@ class TrainList extends React.Component {
         <Flex
           className={styles['date-bar']}
         >
-          <Flex.Item>前一天</Flex.Item>
-          <Flex.Item >{this.props.date}</Flex.Item>
-          <Flex.Item>后一天</Flex.Item>
+          <Flex.Item onClick={this.searchDate(-1)}>前一天</Flex.Item>
+          <Flex.Item onClick={this.selectDate}>{this.props.date}</Flex.Item>
+          <Flex.Item onClick={this.searchDate(1)}>后一天</Flex.Item>
         </Flex>
         <List className={styles.trainlist}>
           {this.props.trains.map((train) => {
@@ -135,7 +180,24 @@ class TrainList extends React.Component {
             <Flex.Item data-key="price">价格</Flex.Item>
           </Flex>
         </div>
-
+        <Calendar
+          visible={this.state.showCalender}
+          title="选择出发日期"
+          type="one"
+          onSelect={this.onSelect}
+          onConfirm={this.onConfirm}
+          defaultDate={new Date()}
+          defaultTimeValue={new Date()}
+          initalMonths="3"
+          minDate={new Date()}
+          maxDate={new Date(+Date.now() + 31536000000)}
+        />
+        <ActivityIndicator
+          toast
+          text="正在加载..."
+          size="large"
+          animating={this.props.loading}
+        />
       </div>
     );
   }
@@ -151,5 +213,6 @@ export default connect((state) => { //eslint-disable-line
     arrive: state.trainList.arrive,
     depart: state.trainList.depart,
     date: state.trainList.date,
+    loading: state.common.loading,
   };
 })(TrainList);

@@ -29,5 +29,10 @@ export default {
     const hour = Number.parseInt(min / 60);//eslint-disable-line
     return `${hour}时${(min % 60)}分`;
   },
+  isToday(date) {
+    const $d = new Date(date);
+    const today = new Date();
+    return $d.toLocaleDateString() === today.toLocaleDateString();
+  },
 };
 
