@@ -18,6 +18,7 @@ class Train extends React.Component {
       },
       origin: '',
       dest: '',
+      isHighway: 0,
     };
     this.showCalender = this.showCalender.bind(this);
     this.onCancel = this.onCancel.bind(this);
@@ -43,7 +44,7 @@ class Train extends React.Component {
   onSubmit() {
     this.history.push({
       pathname: `/trainlist/${this.state.origin}/${this.state.dest}/${date.getYearMonthDay2(this.state.date)}/${this.state.isHighway}`,
-      search: `isHighway=${this.state.isHighway}`,
+      // search: `isHighway=${this.state.isHighway}`,
     });
   }
   // 处理表单输入
@@ -83,10 +84,10 @@ class Train extends React.Component {
             <Button onClick={this.showCalender} >{date.getYearMonthDay(this.state.date)}</Button>
           </Item>
           <Item>
-            <CheckboxItem key="student">
+            <CheckboxItem data-val="student">
               学生票
             </CheckboxItem>
-            <CheckboxItem key="highway">
+            <CheckboxItem data-val="highway" checked={this.state.isHighway} onChange={v => this.setState({ isHighway: +v.target.checked })}>
               高铁动车
             </CheckboxItem>
           </Item>

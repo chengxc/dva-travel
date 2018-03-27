@@ -14,6 +14,7 @@ class TrainList extends React.Component {
     super();
 
     const { params } = match;
+
     this.onClickBack = this.onClickBack.bind(this);
 
     this.history = history;
@@ -27,7 +28,7 @@ class TrainList extends React.Component {
       origin: params.origin,
       dest: params.dest,
       date: params.date,
-      isHighway: params.isHighway,
+      isHighway: !!Number(params.isHighway),
     });
     this.dispatch = dispatch;
     this.search = this.search.bind(this);
@@ -35,28 +36,26 @@ class TrainList extends React.Component {
     this.selectDate = this.selectDate.bind(this);
     this.onConfirm = this.onConfirm.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.searchTrains = this.searchTrains.bind(this);
   }
   onSelect(d) {
     const dateStr = date.getYearMonthDay2(d);
     this.setState({
       showCalender: false,
     });
-    this.dispatch({
-      type: 'trainList/getTrains',
-      origin: this.props.depart,
-      dest: this.props.arrive,
-      date: dateStr,
-      isHighway: this.props.isHighway,
-    });
+    this.searchTrains(dateStr);
   }
+  // 点击导航栏回退
   onClickBack() {
     this.history.goBack();
   }
+  // 已经选择好日期->关闭日期组件
   onConfirm() {
     this.setState({
       showCalender: false,
     });
   }
+  // 排序
   search(e) {
     this.a = 5;
     const { key } = e.target.dataset;
@@ -68,6 +67,13 @@ class TrainList extends React.Component {
       key,
     });
   }
+  // 开始选择日期
+  selectDate() {
+    this.setState({
+      showCalender: true,
+    });
+  }
+  // 选择好日期->查询指定日期的火车列表
   searchDate($date) {
     return () => {
       if (typeof $date === 'number') {
@@ -75,25 +81,27 @@ class TrainList extends React.Component {
 
         const prev = new Date(new Date(this.props.date) - (-$date * 24 * 3600 * 1000));
         const prevDateStr = date.getYearMonthDay2(prev);
-        this.dispatch({
-          type: 'trainList/getTrains',
-          origin: this.props.depart,
-          dest: this.props.arrive,
-          date: prevDateStr,
-          isHighway: this.props.isHighway,
-        });
+
+        this.searchTrains(prevDateStr);
       }
     };
   }
-  selectDate() {
-    this.setState({
-      showCalender: true,
+  /**
+   * 获取火车列表
+   */
+  searchTrains(dateStr) {
+    this.dispatch({
+      type: 'trainList/getTrains',
+      origin: this.props.depart,
+      dest: this.props.arrive,
+      date: dateStr,
+      isHighway: this.props.isHighway,
     });
   }
   render() {
-    // console.log(this.props.isHighway);
     return (
       <div>
+        {/* 顶部导航菜单 */}
         <NavBar
           className={styles['top-bar']}
           mode="dark"
@@ -104,6 +112,7 @@ class TrainList extends React.Component {
           ]}
         >{this.props.depart} ⇀ {this.props.arrive}
         </NavBar>
+        {/* 日期选择菜单 */}
         <Flex
           className={styles['date-bar']}
         >
@@ -111,6 +120,7 @@ class TrainList extends React.Component {
           <Flex.Item onClick={this.selectDate}>{this.props.date}</Flex.Item>
           <Flex.Item onClick={this.searchDate(1)}>后一天</Flex.Item>
         </Flex>
+        {/* 火车列表区域 */}
         <List className={styles.trainlist}>
           {this.props.trains.map((train) => {
             // console.log(!!this.props.isHighway);
@@ -118,7 +128,7 @@ class TrainList extends React.Component {
               //   return console.log('不走');
               // }
                 return (
-                  <Item key={train.TrainNo}>
+                  <Item key={train.TrainNo} className={styles['list-item']}>
                     <Link to="/" >
                       <Flex>
                         <Flex.Item>
@@ -172,6 +182,7 @@ class TrainList extends React.Component {
                 );
             })}
         </List>
+        {/* 底部菜单 */}
         <div className={styles['bottom-bar']}>
           <Flex className={styles['bottom-bar-flex']} onClick={this.search}>
             <Flex.Item data-key="search">筛选</Flex.Item>
@@ -180,6 +191,7 @@ class TrainList extends React.Component {
             <Flex.Item data-key="price">价格</Flex.Item>
           </Flex>
         </div>
+        {/* 日期选择器 */}
         <Calendar
           visible={this.state.showCalender}
           title="选择出发日期"
@@ -192,6 +204,7 @@ class TrainList extends React.Component {
           minDate={new Date()}
           maxDate={new Date(+Date.now() + 31536000000)}
         />
+        {/* 加载进度条 */}
         <ActivityIndicator
           toast
           text="正在加载..."
