@@ -7,6 +7,14 @@ import date from '../utils/date';
 
 const { Item } = List;
 
+const getFlexItems = (count) => {
+  const arr = [];
+  for (let index = 0; index < count; index += 1) {
+    arr.push((<Flex.Item key={Math.random()} />));
+  }
+  return arr;
+};
+
 class TrainList extends React.Component {
   constructor({
     history, dispatch, match,
@@ -151,19 +159,31 @@ class TrainList extends React.Component {
                           <span className={styles['font-tip']}>起</span>
                         </Flex.Item>
                       </Flex>
-                      {/* <div> {train.IsFastPass ? '高铁' : '普铁'} 出发时间： 到达时间： </div> */}
+
                       {/* 座位 价格 */}
                       {(this.state.showSeat) ? (
-                        <Flex className={styles['seat-row']}>{train.SeatList.map((seat) => {
-                          return (
-                            <Flex.Item key={Math.random()}>
-                              {seat.SeatName}:{seat.SeatInventory}张 {seat.SeatInventory <= 0 && (
-                                <span className={styles['font-important']}>(抢)</span>
-                              )}
-                            </Flex.Item>
-                          );
-                        })}
-                          <Flex.Item />
+                        <Flex className={styles['seat-row']}>
+                          {train.SeatList.map((seat, index) => {
+                            // console.log(index);
+                            if (index > 3) return '';
+                            return (
+                              <Flex.Item key={Math.random()}>
+                                {seat.SeatName}:{seat.SeatInventory}张 {seat.SeatInventory <= 0 && (
+                                  <span className={styles['font-important']}>(抢)</span>
+                                )}
+                              </Flex.Item>
+                            );
+                          })}
+                          {/* {console.log(4 - train.SeatList.length)} */}
+                          {(4 - train.SeatList.length) > 0
+                            &&
+                            new Array(4 - train.SeatList.length).map(() => {
+                              console.log('有一个');
+                              return (
+                                <Flex.Item >666</Flex.Item>
+                              );
+                          })}
+                          {getFlexItems(4 - train.SeatList.length)}
                         </Flex>
                       ) : (
                         <Flex className={styles['price-row']}>{train.SeatList.map((seat) => {
