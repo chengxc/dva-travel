@@ -41,6 +41,7 @@ class Train extends React.Component {
   onClickBack() {
     this.history.goBack();
   }
+  // 点击查询
   onSubmit() {
     this.history.push({
       pathname: `/trainlist/${this.state.origin}/${this.state.dest}/${date.getYearMonthDay2(this.state.date)}/${this.state.isHighway}`,
@@ -76,17 +77,17 @@ class Train extends React.Component {
         <img className={styles['img-header']} src="https://images3.c-ctrip.com/train/h5/train-index-adv-default.png" alt="" />
         <List>
           <Item>
-            <input type="text" value={this.state.origin} onChange={this.onInputChnage('origin')} />
-            到
-            <input type="text" value={this.state.dest} onChange={this.onInputChnage('dest')} />
+            <input className={styles['input-place']} type="text" value={this.state.origin} onChange={this.onInputChnage('origin')} />
+            <dt className={styles['icon-change']} />
+            <input className={styles['input-place']} type="text" value={this.state.dest} onChange={this.onInputChnage('dest')} />
           </Item>
           <Item>
             <Button onClick={this.showCalender} >{date.getYearMonthDay(this.state.date)}</Button>
           </Item>
           <Item>
-            <CheckboxItem data-val="student">
+            {/* <CheckboxItem data-val="student">
               学生票
-            </CheckboxItem>
+            </CheckboxItem> */}
             <CheckboxItem data-val="highway" checked={this.state.isHighway} onChange={v => this.setState({ isHighway: +v.target.checked })}>
               高铁动车
             </CheckboxItem>

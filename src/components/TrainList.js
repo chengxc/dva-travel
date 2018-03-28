@@ -45,6 +45,7 @@ class TrainList extends React.Component {
     this.onConfirm = this.onConfirm.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.searchTrains = this.searchTrains.bind(this);
+    this.renderListItem = this.renderListItem.bind(this);
   }
   onSelect(d) {
     const dateStr = date.getYearMonthDay2(d);
@@ -68,7 +69,7 @@ class TrainList extends React.Component {
     this.a = 5;
     const { key } = e.target.dataset;
     // 暂时不提供搜索功能
-    if (key === 'search') return;
+    if (key === 'search' || key === 'price') return;
 
     this.dispatch({
       type: 'trainList/sort',
@@ -106,6 +107,65 @@ class TrainList extends React.Component {
       isHighway: this.props.isHighway,
     });
   }
+  // 渲染列表项
+  renderListItem(train) {
+    return (
+      <Item key={train.TrainNo} className={styles['list-item']}>
+        <Link to="/" >
+          <Flex>
+            <Flex.Item>
+              <div className={styles.begintime}>{train.DepartTime}</div>
+              <div className={styles['font-place']}>{train.DepartStation}</div>
+            </Flex.Item>
+            <Flex.Item className={styles['tip-line']}>
+              <div>{date.minuteToHourMinute(train.RunTime)}</div>
+              <div>{train.TrainNumber}</div>
+            </Flex.Item>
+            <Flex.Item>
+              <div>{train.ArriveTime}</div>
+              <div className={styles['font-place']}>{train.ArriveStation}</div>
+            </Flex.Item>
+            <Flex.Item className={styles['price-item']}>
+              <span className={`${styles['font-tip']} ${styles['font-tip-red']}`}>¥</span>
+              <span className={`${styles['font-important']} ${styles['font-buy']}`}>
+                {train.SeatList[0].SeatPrice}
+              </span>
+              <span className={styles['font-tip']}>起</span>
+            </Flex.Item>
+          </Flex>
+
+          {/* 座位 价格 */}
+          {(this.state.showSeat) ? (
+            <Flex className={styles['seat-row']}>
+              {train.SeatList.map((seat, index) => {
+                // console.log(index);
+                if (index > 3) return '';
+                return (
+                  <Flex.Item key={Math.random()}>
+                    {seat.SeatName}:{seat.SeatInventory}张 {seat.SeatInventory <= 0 && (
+                      <span className={styles['font-important']}>(抢)</span>
+                    )}
+                  </Flex.Item>
+                );
+              })}
+              {/* 补全空位 */}
+              {getFlexItems(4 - train.SeatList.length)}
+            </Flex>
+          ) : (
+            <Flex className={styles['price-row']}>{train.SeatList.map((seat) => {
+              return (
+                <Flex.Item key={Math.random()}>
+                  {seat.SeatName}:{seat.SeatPrice}
+                </Flex.Item>
+              );
+            })}
+            </Flex>
+          )}
+
+        </Link>
+      </Item>
+    );
+  }
   render() {
     return (
       <div>
@@ -131,76 +191,10 @@ class TrainList extends React.Component {
         {/* 火车列表区域 */}
         <List className={styles.trainlist}>
           {this.props.trains.map((train) => {
-            // console.log(!!this.props.isHighway);
-              // if (!!this.props.isHighway && (!train.IsFastPass)) {
-              //   return console.log('不走');
-              // }
-                return (
-                  <Item key={train.TrainNo} className={styles['list-item']}>
-                    <Link to="/" >
-                      <Flex>
-                        <Flex.Item>
-                          <div className={styles.begintime}>{train.DepartTime}</div>
-                          <div className={styles['font-place']}>{train.DepartStation}</div>
-                        </Flex.Item>
-                        <Flex.Item className={styles['tip-line']}>
-                          <div>{date.minuteToHourMinute(train.RunTime)}</div>
-                          <div>{train.TrainNumber}</div>
-                        </Flex.Item>
-                        <Flex.Item>
-                          <div>{train.ArriveTime}</div>
-                          <div className={styles['font-place']}>{train.ArriveStation}</div>
-                        </Flex.Item>
-                        <Flex.Item className={styles['price-item']}>
-                          <span className={`${styles['font-tip']} ${styles['font-tip-red']}`}>¥</span>
-                          <span className={`${styles['font-important']} ${styles['font-buy']}`}>
-                            {train.SeatList[0].SeatPrice}
-                          </span>
-                          <span className={styles['font-tip']}>起</span>
-                        </Flex.Item>
-                      </Flex>
-
-                      {/* 座位 价格 */}
-                      {(this.state.showSeat) ? (
-                        <Flex className={styles['seat-row']}>
-                          {train.SeatList.map((seat, index) => {
-                            // console.log(index);
-                            if (index > 3) return '';
-                            return (
-                              <Flex.Item key={Math.random()}>
-                                {seat.SeatName}:{seat.SeatInventory}张 {seat.SeatInventory <= 0 && (
-                                  <span className={styles['font-important']}>(抢)</span>
-                                )}
-                              </Flex.Item>
-                            );
-                          })}
-                          {/* {console.log(4 - train.SeatList.length)} */}
-                          {(4 - train.SeatList.length) > 0
-                            &&
-                            new Array(4 - train.SeatList.length).map(() => {
-                              console.log('有一个');
-                              return (
-                                <Flex.Item >666</Flex.Item>
-                              );
-                          })}
-                          {getFlexItems(4 - train.SeatList.length)}
-                        </Flex>
-                      ) : (
-                        <Flex className={styles['price-row']}>{train.SeatList.map((seat) => {
-                          return (
-                            <Flex.Item key={Math.random()}>
-                              {seat.SeatName}:{seat.SeatPrice}
-                            </Flex.Item>
-                          );
-                        })}
-                        </Flex>
-                      )}
-
-                    </Link>
-                  </Item>
-
-                );
-            })}
+            // 如果搜索条件是高铁动车的话，就过滤掉普通列车
+            if (this.props.isHighway && !train.IsFastPass) return '';
+            return this.renderListItem(train);
+          })}
         </List>
         {/* 底部菜单 */}
         <div className={styles['bottom-bar']}>

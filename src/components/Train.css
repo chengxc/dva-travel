@@ -7,3 +7,24 @@
     color: #fff;
     background-color: #ff9a14;
 }
+
+.icon-change{
+    display: inline-block;
+    width: 7%;
+    height: 1.5rem;
+
+    background-image: url("//pic.c-ctrip.com/train/h5/train/train-index-jb.png");
+    background-size: 4rem;
+    background-position: -1.8rem 0;
+
+    vertical-align: middle;
+}
+
+.input-place{
+    width:45%;
+    font-size: 1.4rem;
+}
+
+.input-place:last-child{
+    text-align: right;
+}
