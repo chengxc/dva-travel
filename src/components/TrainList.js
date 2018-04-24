@@ -86,7 +86,10 @@ class TrainList extends React.Component {
   searchDate($date) {
     return () => {
       if (typeof $date === 'number') {
-        if ($date < 0 && date.isToday(this.props.date)) { return console.log('已经是最早的一天了'); }
+        if ($date < 0 && date.isToday(this.props.date)) {
+          // eslint-disable-next-line
+          return console.log('已经是最早的一天了');
+        }
 
         const prev = new Date(new Date(this.props.date) - (-$date * 24 * 3600 * 1000));
         const prevDateStr = date.getYearMonthDay2(prev);

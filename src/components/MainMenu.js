@@ -70,6 +70,65 @@ class MainMenu extends React.Component {
             <a href="/">保险·签证</a>
           </Flex.Item>
         </Flex>
+        <WhiteSpace size="sm" />
+        <Flex className={classnames(styles['menu-row'], styles.small)}>
+          <Flex.Item className={styles['menu-cell']}>
+            <a href="/">
+              <i className={classnames(styles['icon-freestyle'], styles.icon)} />
+              <em>自由行</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-hotel'], styles.icon)} />
+              <em>酒店+景点</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-airpark'], styles.icon)} />
+              <em>机场停车</em>
+            </a>
+          </Flex.Item>
+          <Flex.Item className={styles['menu-cell']}>
+            <a href="/">
+              <i className={classnames(styles['icon-groupleader'], styles.icon)} />
+              <em>微领队</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-freestyle'], styles.icon)} />
+              <em>境外玩乐</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-freestyle'], styles.icon)} />
+              <em>行李寄送</em>
+            </a>
+          </Flex.Item>
+          <Flex.Item className={styles['menu-cell']}>
+            <a href="/">
+              <i className={classnames(styles['icon-freestyle'], styles.icon)} />
+              <em>一日游</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-foreign-currency'], styles.icon)} />
+              <em>外币兑换</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-freestyle'], styles.icon)} />
+              <em>行李寄送</em>
+            </a>
+          </Flex.Item>
+          <Flex.Item className={styles['menu-cell']}>
+            <a href="/">
+              <i className={classnames(styles['icon-freestyle'], styles.icon)} />
+              <em>高端游</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-join'], styles.icon)} />
+              <em>加盟合作</em>
+            </a>
+            <a href="/">
+              <i className={classnames(styles['icon-freestyle'], styles.icon)} />
+              <em>行李寄送</em>
+            </a>
+          </Flex.Item>
+        </Flex>
 
       </div>
     );

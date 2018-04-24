@@ -39,6 +39,49 @@
 .other.menu-row a{
     background-color: #fc9720;
 }
-.menu-cell{
 
+.small.menu-row{
+    height:12rem;
+}
+.small.menu-row a{
+    height:32.3%;
+    line-height: 1rem;
+    color:black;
+    background-color: white;
+}
+.small em{
+    font-style: normal;
+    display: block;
+}
+.small .icon{
+    margin-top: 0.3rem;
+    width:20px;
+    height:20px;
+    display: inline-block;
+    background-size: 20px auto;
+    background-image: url(http://pic.c-ctrip.com/platform/h5/home/un_ico_subnav_v7.5@2x.png);
+}
+
+/* 自由行 */
+.icon-freestyle{
+    background-position: 0 -80px;
+}
+
+/* 机场停车 */
+.icon-airpark{
+    background-position: 0 -20px;
+}
+
+/* 微领队 */
+.icon-groupleader{
+    background-position: 0 -292px;
+}
+/* 外币兑换 */
+.icon-foreign-currency{
+    background-position: 0 -200px;
+}
+
+/* 加盟合作 */
+.icon-join{
+    background-position: 0 -220px;
 }

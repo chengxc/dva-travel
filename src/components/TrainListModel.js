@@ -35,7 +35,7 @@ export default {
         origin,
         date,
       });
-      console.log(response);
+      console.log('响应值：', response);  //eslint-disable-line
       yield put({
         type: 'save',
         trains: response.TrainInfoList,
