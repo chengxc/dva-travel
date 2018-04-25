@@ -15,6 +15,9 @@ const getFlexItems = (count) => {
   return arr;
 };
 
+/**
+ * 火车列表
+ */
 class TrainList extends React.Component {
   constructor({
     history, dispatch, match,
@@ -112,9 +115,10 @@ class TrainList extends React.Component {
   }
   // 渲染列表项
   renderListItem(train) {
+    console.dir(train); //eslint-disable-line
     return (
       <Item key={train.TrainNo} className={styles['list-item']}>
-        <Link to="/" >
+        <Link to={`/traindetail/${this.props.date}/${train.TrainNumber}/${train.DepartTime}/${train.ArriveTime}`} >
           <Flex>
             <Flex.Item>
               <div className={styles.begintime}>{train.DepartTime}</div>

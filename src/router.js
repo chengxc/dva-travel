@@ -8,6 +8,7 @@ import Suggest from './components/Suggest';
 import Customer from './components/Customer';
 import Train from './components/Train';
 import TrainList from './components/TrainList';
+import TrainDetail from './components/TrainDetail';
 
 function RouterConfig({ history }) {
   return (
@@ -19,6 +20,7 @@ function RouterConfig({ history }) {
         <Route path="/suggest" exact component={Suggest} />
         <Route path="/train" exact component={Train} />
         <Route path="/trainlist/:origin/:dest/:date/:isHighway" exact component={TrainList} />
+        <Route path="/traindetail/:date/:trainNumber/:begin/:end/" exact component={TrainDetail} />
       </Switch>
     </Router>
   );
