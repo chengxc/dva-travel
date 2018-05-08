@@ -20,7 +20,7 @@ function RouterConfig({ history }) {
         <Route path="/suggest" exact component={Suggest} />
         <Route path="/train" exact component={Train} />
         <Route path="/trainlist/:origin/:dest/:date/:isHighway" exact component={TrainList} />
-        <Route path="/traindetail/:date/:trainNumber/:begin/:end/" exact component={TrainDetail} />
+        <Route path="/traindetail/:origin/:dest/:date/:trainNumber/:begin/:end/" exact component={TrainDetail} />
       </Switch>
     </Router>
   );

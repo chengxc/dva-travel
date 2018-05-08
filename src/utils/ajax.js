@@ -7,7 +7,7 @@ const ajax = axios.create({
 
 ajax.interceptors.request.use((config) => {
   // 在发送请求之前做些什么
-  console.log(config);  //eslint-disable-line
+  // console.log(config);  //eslint-disable-line
   return config;
 }, (error) => {
   // 对请求错误做些什么

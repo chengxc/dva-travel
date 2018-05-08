@@ -1,14 +1,116 @@
-.detail-modal{
-    width:100%;
-    height:100%;
-    border-radius: 0;
+.detail-container {
+  background: #f5f5f5;
 }
 
-.detail-modal-content{
-    width:100%;
-    height:100%;
-    position: fixed;
-    top:0;
-    left:0;
-    background-color:rgba(0,0,0,.8);
+.detail-modal {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.detail-modal-content {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .8);
+  padding-top: 6rem;
+  color: white;
+}
+
+.detail-header {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.detail-title {
+  font-size: 1.3rem;
+}
+
+.detail-row {
+  text-align: center;
+}
+
+.vip-origin,
+.vip-dest {
+  color: #f60;
+}
+
+.header-container {
+  background-color: #108ee9;
+  color: #fff;
+  padding-bottom: 1.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+
+.header-left {}
+
+.header-middle {
+  text-align: center;
+}
+
+.header-right {
+  text-align: right;
+}
+
+.header-trainno {
+  font-size: 1.1rem;
+}
+
+.header-stop-text {
+  border: 1px solid white;
+  width: 4rem;
+  margin: 0.5rem auto;
+  padding: 5px 2px;
+}
+
+.header-time {
+  font-size: 1.8rem;
+}
+
+.seat-container {
+  background-color: white;
+}
+
+.seat-item {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.seat-type {
+  font-size: 1.1rem;
+}
+
+.seat-price {
+  color: #999;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.seat-snapup a {
+  color: #108ee9;
+}
+
+.seat-item.current {
+  background: #effaff;
+  border:1px solid rgb(163,219,242)
+}
+
+.icon-12306 {
+  width: 1rem;
+  height: 1rem;
+  background-size: 1rem auto;
+  display: inline-block;
+  background-image: url(https://pic.c-ctrip.com/train/h5/train/train-x-icon2.png)
+}
+
+.btn-important {
+  background: #ff9913;
+  color: white;
+  border-radius: 0;
 }

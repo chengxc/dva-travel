@@ -30,6 +30,8 @@ class TrainList extends React.Component {
 
     this.history = history;
     this.state = {
+      origin: params.origin,
+      dest: params.dest,
       showSeat: true, // 显示座位数，不显示价格
       showCalender: false, // 是否显示日期选择控件
     };
@@ -41,7 +43,7 @@ class TrainList extends React.Component {
       date: params.date,
       isHighway: !!Number(params.isHighway),
     });
-    this.dispatch = dispatch;
+    this.dest = params.dest;
     this.search = this.search.bind(this);
     this.searchDate = this.searchDate.bind(this);
     this.selectDate = this.selectDate.bind(this);
@@ -118,7 +120,7 @@ class TrainList extends React.Component {
     console.dir(train); //eslint-disable-line
     return (
       <Item key={train.TrainNo} className={styles['list-item']}>
-        <Link to={`/traindetail/${this.props.date}/${train.TrainNumber}/${train.DepartTime}/${train.ArriveTime}`} >
+        <Link to={`/traindetail/${this.state.origin}/${this.state.dest}/${this.props.date}/${train.TrainNumber}/${train.DepartTime}/${train.ArriveTime}`} >
           <Flex>
             <Flex.Item>
               <div className={styles.begintime}>{train.DepartTime}</div>
