@@ -2,13 +2,12 @@
 import 'antd-mobile/dist/antd-mobile.css';
 
 import dva from 'dva';
-import BannerModel from './components/BannerModel';
+import BannerModel from './components/Banner/BannerModel';
 import TrainListModel from './components/TrainList/TrainListModel';
 import CommonModel from './models/common';
 import router from './router';
 
 import './assets/common.css';
-// import './assets/fontawesome/css/fontawesome-all.css';
 
 // 1. 初始化
 const app = dva();

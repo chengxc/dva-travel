@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { WhiteSpace } from 'antd-mobile';
 import MainMenu from './MainMenu';
-import Banner from './Banner';
+import Banner from './Banner/index';
 
 const Suggest = ({ dispatch }) => {
   dispatch({
