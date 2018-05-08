@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'dva';
 import { Flex, WhiteSpace, Modal, NavBar, Icon, List, InputItem, Button } from 'antd-mobile';
 import classnames from 'classnames';
-import ajax from '../utils/ajax';
+import ajax from '../../utils/ajax';
 import styles from './TrainDetail.css';
 
-
 class TrainDetail extends React.Component {
-  constructor({ match, trains }) {
+  constructor({ match, trains, history }) {
     super();
     const { params } = match;
     const {
@@ -31,13 +30,12 @@ class TrainDetail extends React.Component {
       seatList,
       leastSeat: seatList.sort((v1, v2) => (v1.SeatPrice - v2.SeatPrice)),
     };
-    console.log(this.state.trainDetail);
 
+    this.history = history;
     this.renderStations = this.renderStations.bind(this);
     this.renderStopModal = this.renderStopModal.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
     this.renderSeats = this.renderSeats.bind(this);
-
 
     ajax.post('restapi/soa2/10103/json/GetTrainStopListV3?_fxpcqlniredt=09031120410292003758', {
       DepartureDate: date,
@@ -48,9 +46,7 @@ class TrainDetail extends React.Component {
       this.setState({ stops: res.TrainStopList });
     });
   }
-  componentDidMount() {
 
-  }
   /**
    * 经停列表
    */
@@ -178,6 +174,7 @@ class TrainDetail extends React.Component {
         <NavBar
           mode="dark"
           icon={<Icon type="left" />}
+          onLeftClick={() => this.history.go(-1)}
         >订单填写
         </NavBar>
 

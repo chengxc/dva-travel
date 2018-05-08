@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { NavBar, Icon, List, Flex, Calendar, ActivityIndicator } from 'antd-mobile';
 import { Link } from 'dva/router';
 import styles from './TrainList.less';
-import date from '../utils/date';
+import date from '../../utils/date';
 
 const { Item } = List;
 
@@ -43,6 +43,7 @@ class TrainList extends React.Component {
       date: params.date,
       isHighway: !!Number(params.isHighway),
     });
+    this.dispatch = dispatch;
     this.dest = params.dest;
     this.search = this.search.bind(this);
     this.searchDate = this.searchDate.bind(this);
@@ -117,7 +118,7 @@ class TrainList extends React.Component {
   }
   // 渲染列表项
   renderListItem(train) {
-    console.dir(train); //eslint-disable-line
+    // console.dir(train); //eslint-disable-line
     return (
       <Item key={train.TrainNo} className={styles['list-item']}>
         <Link to={`/traindetail/${this.state.origin}/${this.state.dest}/${this.props.date}/${train.TrainNumber}/${train.DepartTime}/${train.ArriveTime}`} >

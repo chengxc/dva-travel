@@ -6,9 +6,9 @@ import IndexPage from './routes/IndexPage';
 import My from './components/My';
 import Suggest from './components/Suggest';
 import Customer from './components/Customer';
-import Train from './components/Train';
-import TrainList from './components/TrainList';
-import TrainDetail from './components/TrainDetail';
+import Train from './components/Train/index';
+import TrainList from './components/TrainList/index';
+import TrainDetail from './components/TrainDetail/index';
 
 function RouterConfig({ history }) {
   return (

@@ -3,7 +3,7 @@ import 'antd-mobile/dist/antd-mobile.css';
 
 import dva from 'dva';
 import BannerModel from './components/BannerModel';
-import TrainListModel from './components/TrainListModel';
+import TrainListModel from './components/TrainList/TrainListModel';
 import CommonModel from './models/common';
 import router from './router';
 

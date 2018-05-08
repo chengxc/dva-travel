@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Button, Checkbox, Calendar, NavBar, Icon } from 'antd-mobile';
 import styles from './Train.css';
-import date from '../utils/date';
+import date from '../../utils/date';
 
 const { Item } = List;
 const { CheckboxItem } = Checkbox;

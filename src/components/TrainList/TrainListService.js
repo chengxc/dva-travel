@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Const from '../utils/const';
+import Const from '../../utils/const';
 
 export default {
   getTrains({
